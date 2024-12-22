@@ -57,7 +57,7 @@ export default function Nav() {
 
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
         <NavbarItem>
-          <Link color="foreground" href="#">
+          <Link color="foreground" href="/features">
             Features
           </Link>
         </NavbarItem>
@@ -67,17 +67,17 @@ export default function Nav() {
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link color="foreground" href="#">
+          <Link color="foreground" href="/integrations">
             Integrations
           </Link>
         </NavbarItem>
       </NavbarContent>
       <NavbarContent justify="end">
         <NavbarItem className="hidden lg:flex">
-          <Link href="#">Login</Link>
+          <Link href="/login">Login</Link>
         </NavbarItem>
         <NavbarItem>
-          <Button as={Link} color="primary" href="#" variant="flat">
+          <Button as={Link} color="primary" href="register" variant="flat">
             Sign Up
           </Button>
         </NavbarItem>
