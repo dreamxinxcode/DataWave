@@ -62,7 +62,7 @@ export default function Nav() {
           </Link>
         </NavbarItem>
         <NavbarItem isActive>
-          <Link aria-current="page" href="#">
+          <Link aria-current="page" href="/customers">
             Customers
           </Link>
         </NavbarItem>

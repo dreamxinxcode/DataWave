@@ -3,12 +3,14 @@
 import Chart from "./components/Chart";
 import ChartForm from "./components/ChartForm";
 import Nav from "./components/Nav";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IChartConfig } from "./types/IChartConfig";
+import ChartPreview from "./components/ChartPreview";
 
 
 export default function Home() {
   const [showChart, setShowChart] = useState<boolean>(false);
+  const [showChartPreview, setShowChartPreview] = useState<boolean>(true);
   const [showChartForm, setShowChartForm] = useState<boolean>(true);
   const [chartConfig, setChartConfig] = useState<IChartConfig>({
     symbol: '', 
@@ -17,6 +19,7 @@ export default function Home() {
     height: 400,
     width: 800,
     lineColor: '',
+    lineWeight: 2,
     bgColor: '',
     axisLabelColor: '',
     axisLineColor: '',
@@ -33,6 +36,7 @@ export default function Home() {
   return (
     <>
       <Nav />
+      {showChartPreview && <ChartPreview chartConfig={chartConfig} />}
       {showChart && <Chart chartConfig={chartConfig} />}
       {showChartForm && <ChartForm onConfigChange={handleConfigChange} />}
     </>

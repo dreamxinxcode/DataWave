@@ -220,7 +220,7 @@ export default function Chart({ chartConfig }: IChartProps) {
           .on("end", () => {
             movingText.style("opacity", 0);
           });
-      
+
           const animatePrice = () => {
             const lengthInterpolator = d3.interpolate(0, totalLength);
           
@@ -230,9 +230,11 @@ export default function Chart({ chartConfig }: IChartProps) {
               // Get point along the line
               const point = dataPath.node().getPointAtLength(length);
           
-              // Update text position and value
-              const closestIndex = Math.round(
-                (length / totalLength) * (data.length - 1)
+              // Calculate the closest data index
+              const progress = length / totalLength;
+              const closestIndex = Math.min(
+                data.length - 1,
+                Math.round(progress * (data.length - 1))
               );
           
               const price = data[closestIndex].price.toFixed(2);
@@ -251,10 +253,10 @@ export default function Chart({ chartConfig }: IChartProps) {
                 .attr("dy", "1.5em") // Offset downwards
                 .text(`$${price}`);
           
-              if (elapsed >= (chartConfig.duration * 1000)) return true; // Stop the timer after
+              if (elapsed >= chartConfig.duration * 1000) return true; // Stop the timer after animation duration
             });
           };          
-      
+
           if (chartConfig.logoURL) {
             g.append("image")
               .attr("href", chartConfig.logoURL)

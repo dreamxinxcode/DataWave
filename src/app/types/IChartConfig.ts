@@ -5,6 +5,7 @@ export interface IChartConfig {
     height: number;
     width: number;
     lineColor: string;
+    lineWeight: number;
     bgColor: string;
     axisLabelColor: string;
     axisLineColor: string;

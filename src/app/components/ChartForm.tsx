@@ -1,7 +1,7 @@
 import { Input, Button } from "@nextui-org/react";
 import { Select, SelectItem } from "@nextui-org/select";
 import { Slider } from "@nextui-org/slider";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IChartType } from "../types/IChartType";
 
 
@@ -17,11 +17,42 @@ export default function ChartForm({ onConfigChange }) {
     const [height, setHeight] = useState<number>(400);
     const [width, setWidth] = useState<number>(800);
     const [lineColor, setLineColor] = useState<string>("#8eeafd");
+    const [lineWeight, setLineWeight] = useState<number>(2);
     const [bgColor, setBgColor] = useState<string>("#212436");
     const [axisLabelColor, setAxisLabelColor] = useState<string>("#d4dff8");
     const [axisLineColor, setAxisLineColor] = useState<string>("#8a93c2");
     const [axisTickColor, setAxisTickColor] = useState<string>("#8a93c2");
     const [logoURL, setLogoURL] = useState<string>("");
+
+    useEffect(() => {
+        onConfigChange({
+            symbol, 
+            chartType, 
+            duration,
+            height,
+            width,
+            lineColor,
+            lineWeight,
+            bgColor,
+            axisLabelColor,
+            axisLineColor,
+            axisTickColor,
+            logoURL,
+        });
+    }, [         
+        symbol, 
+        chartType, 
+        duration,
+        height,
+        width,
+        lineColor,
+        lineWeight,
+        bgColor,
+        axisLabelColor,
+        axisLineColor,
+        axisTickColor,
+        logoURL,
+    ]);
 
     const handleSubmit = () => {
         onConfigChange({
@@ -31,6 +62,7 @@ export default function ChartForm({ onConfigChange }) {
             height,
             width,
             lineColor,
+            lineWeight,
             bgColor,
             axisLabelColor,
             axisLineColor,
@@ -114,6 +146,20 @@ export default function ChartForm({ onConfigChange }) {
                             </SelectItem>
                         ))}
                     </Select>
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                            Line Weight ({lineWeight})
+                        </label>
+                        <Slider
+                            className="w-full"
+                            defaultValue={2}
+                            maxValue={120}
+                            minValue={1}
+                            step={1}
+                            value={lineWeight}
+                            onChange={(value: number) => setLineWeight(value)}
+                        />
+                    </div>
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">
                             Duration ({duration} seconds)
