@@ -10,8 +10,8 @@ export const chartTypes: IChartType[] = [
     { key: "candle", label: "Candlestick" },
 ];
 
-export default function ChartForm({ onConfigChange }) {
-    const [symbol, setSymbol] = useState<string>("PLTR");
+export default function ChartForm({ onConfigSubmit, onConfigChange }) {
+    const [symbol, setSymbol] = useState<string>("TSLA");
     const [chartType, setChartType] = useState<string>(chartTypes[0].key); // Default to the first chart type
     const [duration, setDuration] = useState<number>(50);
     const [height, setHeight] = useState<number>(400);
@@ -55,7 +55,7 @@ export default function ChartForm({ onConfigChange }) {
     ]);
 
     const handleSubmit = () => {
-        onConfigChange({
+        onConfigSubmit({
             symbol, 
             chartType, 
             duration,

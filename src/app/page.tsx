@@ -27,10 +27,15 @@ export default function Home() {
     logoURL: '',
   });
 
-  const handleConfigChange = (newConfig: IChartConfig) => {
+  const handleConfigSubmit = (newConfig: IChartConfig) => {
     setChartConfig((prev: IChartConfig) => ({ ...prev, ...newConfig }));
-    setShowChartForm(false);
+    setShowChartForm(false);    
+    setShowChartPreview(false);
     setShowChart(true);
+  };
+
+  const updatePreview = (newConfig: IChartConfig) => {
+    setChartConfig((prev: IChartConfig) => ({ ...prev, ...newConfig }));
   };
 
   return (
@@ -38,7 +43,7 @@ export default function Home() {
       <Nav />
       {showChartPreview && <ChartPreview chartConfig={chartConfig} />}
       {showChart && <Chart chartConfig={chartConfig} />}
-      {showChartForm && <ChartForm onConfigChange={handleConfigChange} />}
+      {showChartForm && <ChartForm onConfigChange={updatePreview} onConfigSubmit={handleConfigSubmit} />}
     </>
   );
 }

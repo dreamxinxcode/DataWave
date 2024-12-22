@@ -107,13 +107,13 @@ export default function Chart({ chartConfig }: IChartProps) {
   useEffect(() => {
     const fetchMarketData = async () => {
       try {
-        // const API_KEY = process.env.NEXT_PUBLIC_ALPHA_VANTAGE_API_KEY;
-        // const response = await axios.get(
-        //     `https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${chartConfig.symbol}&interval=60min&apikey=${API_KEY}`
-        //   );
-        // const data = response.data["Time Series (60min)"];
-        const data = res["Time Series (60min)"];
-
+        const API_KEY = process.env.NEXT_PUBLIC_ALPHA_VANTAGE_API_KEY;
+        const response = await axios.get(
+            `https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${chartConfig.symbol}&interval=60min&apikey=${API_KEY}`
+          );
+        const data = response.data["Time Series (60min)"];
+        // const data = res["Time Series (60min)"];
+console.log(response)
         const parsedData = Object.keys(data).map((date) => ({
             date: new Date(date),
             price: parseFloat(data[date]["4. close"]),
